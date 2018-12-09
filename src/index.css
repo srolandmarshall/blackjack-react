@@ -14,6 +14,20 @@ code {
 }
 
 .table {
-    background-color: green;
-    height: 40px;
+  background-color: green;
+  background-image: url("https://www.transparenttextures.com/patterns/felt.png");
+  border-color: brown;
+  border-radius: 5px;
+  border-style: outset;
+  border-width: 20px;
+  height: 400px;
+}
+
+.card {
+  height: 100px;
+  width: auto;
+}
+
+.dealer {
+  padding-top: 25px;
 }

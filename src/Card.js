@@ -7,7 +7,6 @@ export default class Card extends Component {
     this.state = {
       front: require('./cards/club_1.png'),
       back: require('./cards/back.png'),
-      down: true,
     }
   }
 
@@ -18,10 +17,10 @@ export default class Card extends Component {
     })
   }
 
-  componentWillReceiveProps(nextProps){
-    console.log(nextProps.value)
+  componentDidMount(){
+    console.log(this.props.down)
     this.setState({
-      down: nextProps.value
+      down: this.props.down
     })
   }
 

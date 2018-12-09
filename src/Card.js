@@ -18,8 +18,9 @@ export default class Card extends Component {
   }
 
   componentDidMount(){
-    console.log(this.props.down)
+    console.log(this.props.front)
     this.setState({
+      front: require(this.props.front),
       down: this.props.down
     })
   }

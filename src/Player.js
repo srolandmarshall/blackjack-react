@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Hand from './Hand.js'
+import Card from './Card.js'
 
 
 export default class Player extends Component {
 
   render(){
-    return (<div class="player"><Hand /> <Hand /></div>)
+    return (<div className="player"><Card down={false} /><Card down="false" /></div>)
   }
 }

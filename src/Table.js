@@ -6,7 +6,7 @@ import './index.css'
 class Table extends Component {
 
   render() {
-    return (<div class="table">
+    return (<div className="table">
       <Dealer />
       <Player />
     </div>)

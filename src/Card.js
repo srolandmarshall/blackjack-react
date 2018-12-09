@@ -20,7 +20,7 @@ export default class Card extends Component {
   componentDidMount(){
     console.log(this.props.front)
     this.setState({
-      front: require(this.props.front),
+      front: this.props.front,
       down: this.props.down
     })
   }

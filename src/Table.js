@@ -38,12 +38,12 @@ class Table extends Component {
 
   dealCard = () => {
     let dealingDeck = this.state.deck
-    let dealtCard = dealingDeck[0]
-    dealingDeck.shift()
-    this.setState({
-      deck: dealingDeck
-    })
-    return './cards/'+dealtCard+'.png'
+    let dealtCard = dealingDeck[Math.floor(Math.random() * dealingDeck.length)]
+    // dealingDeck.shift()
+    // this.setState({
+    //   deck: dealingDeck
+    // })
+    return require('./cards/'+dealtCard+'.png')
   }
 
   render() {

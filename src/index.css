@@ -31,3 +31,8 @@ code {
 .dealer {
   padding-top: 25px;
 }
+
+.player {
+  padding-top: 150px;
+  margin-top: auto;
+}

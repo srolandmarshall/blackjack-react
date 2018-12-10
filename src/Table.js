@@ -6,7 +6,7 @@ import './index.css'
 
 const suits = ["spade", "heart", "club", "diamond"]
 const values = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king"]
-
+let cardNumber = 0;
 function populateDeck() {
   let arr = []
   suits.forEach(suit => {
@@ -32,17 +32,16 @@ class Table extends Component {
   constructor(props){
     super(props);
     this.state = {
-      deck: newDeck
+      deck: newDeck,
+      cardNum: 0
     }
+    cardNumber = this.state.cardNum;
   }
 
   dealCard = () => {
     let dealingDeck = this.state.deck
-    let dealtCard = dealingDeck[Math.floor(Math.random() * dealingDeck.length)]
-    // dealingDeck.shift()
-    // this.setState({
-    //   deck: dealingDeck
-    // })
+    let dealtCard = dealingDeck[cardNumber]
+    cardNumber+=1
     return require('./cards/'+dealtCard+'.png')
   }
 
@@ -51,6 +50,12 @@ class Table extends Component {
       <div className="dealer"><Card front={this.dealCard()} down={true} /><Card front={this.dealCard()} down={false} /></div>
       <div className="player"><Card front={this.dealCard()} down={false} /><Card front={this.dealCard()} down={false} /></div>
     </div>)
+  }
+
+  componentDidUpdate(){
+    this.setState({
+      cardNum: cardNumber
+    })
   }
 
 }

@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Dealer from './Dealer.js'
 import Player from './Player.js'
 import Card from './Card.js'
+import Controls from './Controls.js'
 import './index.css'
 
 const suits = ["spade", "heart", "club", "diamond"]
@@ -16,6 +17,7 @@ function populateDeck() {
   })
   return arr
 }
+let defaultDeck = populateDeck()
 
 function shuffle(deck) {
     for (let i = deck.length - 1; i > 0; i--) {
@@ -25,31 +27,64 @@ function shuffle(deck) {
     return deck;
 }
 
-var newDeck = shuffle(populateDeck())
+function shuffleDefaultDeck(){
+  return shuffle(defaultDeck)
+}
 
 class Table extends Component {
 
   constructor(props){
     super(props);
     this.state = {
-      deck: newDeck,
+      deck: shuffleDefaultDeck(),
       cardNum: 0
     }
     cardNumber = this.state.cardNum;
   }
 
-  dealCard = () => {
-    let dealingDeck = this.state.deck
-    let dealtCard = dealingDeck[cardNumber]
+  dealCardUp = () => {
+    let retVal = <Card front={require('./cards/'+this.state.deck[cardNumber]+'.png')} down={false}/>
     cardNumber+=1
-    return require('./cards/'+dealtCard+'.png')
+    return retVal
+  }
+
+  dealCardDown = () => {
+    let retVal = <Card front={require('./cards/'+this.state.deck[cardNumber]+'.png')} down={true}/>
+    cardNumber+=1
+    return retVal
+  }
+
+  dealInitialCards = (dealer) => {
+    let dealingDeck = this.state.deck
+    let arr = []
+    if (dealer){
+        arr.push(this.dealCardDown())
+        arr.push(this.dealCardUp())
+      }
+    else{
+      for (var i = 2; i > 0; i--) {
+        arr.push(this.dealCardUp())
+      }
+    }
+    return arr
+  }
+
+  dealGame = () => {
+    this.setState({
+      deck: shuffleDefaultDeck()
+    })
   }
 
   render() {
-    return (<div className="table">
-      <div className="dealer"><Card front={this.dealCard()} down={true} /><Card front={this.dealCard()} down={false} /></div>
-      <div className="player"><Card front={this.dealCard()} down={false} /><Card front={this.dealCard()} down={false} /></div>
-    </div>)
+    return (
+      <div>
+        <Controls deal={this.dealGame} hit={this.handleHit} stand={this.handleStand}/>
+        <div className="table">
+          <Dealer cards={this.dealInitialCards(true)}/>
+          <Player cards={this.dealInitialCards(false)}/>
+        </div>
+      </div>
+  )
   }
 
   componentDidUpdate(){
